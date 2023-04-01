@@ -4,23 +4,33 @@ console.log('You got this');
 // run the onready code
 $(document).ready(onReady);
 
+//global variable used to calculate total monthly salary
+let totalMonthly=0
+
 // function that will serve as a staging area for events
-function onReady(){
+function onReady() {
     // function that says once the submit button is clicked
     // to run the insert employee function
- $('.submit-button').on('click',insertEmployee)
+    $('.submit-button').on('click', insertEmployee)
+    // A function to delete the employee using the delete button
+    $('#tbody').on('click', '.deleteButton', removeEmployee)
+    $('')
 }
 
-function insertEmployee(event){
+// function to insert employee information to the tbody section
+function insertEmployee(event) {
+    // A event preventions that stops form from performing its default function
     event.preventDefault();
-    if ($('#firstName').val() !='' && $('#id').val()!=''){
-        let employee= {
-            firstName:$('#firstName').val(),
+    // A if statement to make sure the employee inputs the required functions
+    if ($('#firstName').val() != '' && $('#id').val() != '' ) {
+        let employee = {
+            firstName: $('#firstName').val(),
             lastName: $('#lastName').val(),
             id: $('#id').val(),
             Title: $('#title').val(),
             annualSalary: $('#annualSalary').val()
         }
+        // Used to add the values in the paremeters above to the tbody section
         $('#tbody').append(`<tr>
         <td>${employee.firstName}</td>
         <td>${employee.lastName}</td>
@@ -31,11 +41,19 @@ function insertEmployee(event){
           <button class="deleteButton">Delete</button>
         </td>
     </tr>`)
-        
-    $('#firstName').val('')
-    $('#lastName').val('')
-    $('#id').val('')
-    $('#title').val('')
-    $('#annualSalary').val('')
+        // Made to set the values back to empty after submitted 
+        $('#firstName').val('')
+        $('#lastName').val('')
+        $('#id').val('')
+        $('#title').val('')
+        $('#annualSalary').val('')
+
+        totalMonthly+=parseInt(`${employee.annualSalary}`)
+        $('#total').text(totalMonthly);
     }
+}
+
+// function to delete the employees information
+function removeEmployee() {
+    $(this).parent().parent().remove();
 }

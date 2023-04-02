@@ -5,7 +5,8 @@ console.log('You got this');
 $(document).ready(onReady);
 
 //global variable used to calculate total monthly salary
-let totalMonthly=0
+let totalMonthly = ''
+let employeeGlobal=[]
 
 // function that will serve as a staging area for events
 function onReady() {
@@ -14,15 +15,16 @@ function onReady() {
     $('.submit-button').on('click', insertEmployee)
     // A function to delete the employee using the delete button
     $('#tbody').on('click', '.deleteButton', removeEmployee)
-    $('')
+
 }
+
 
 // function to insert employee information to the tbody section
 function insertEmployee(event) {
     // A event preventions that stops form from performing its default function
     event.preventDefault();
     // A if statement to make sure the employee inputs the required functions
-    if ($('#firstName').val() != '' && $('#id').val() != '' ) {
+    if ($('#firstName').val() != '' && $('#id').val() != '') {
         let employee = {
             firstName: $('#firstName').val(),
             lastName: $('#lastName').val(),
@@ -41,6 +43,7 @@ function insertEmployee(event) {
           <button class="deleteButton">Delete</button>
         </td>
     </tr>`)
+    employeeGlobal.push(employee.annualSalary)
         // Made to set the values back to empty after submitted 
         $('#firstName').val('')
         $('#lastName').val('')
@@ -48,12 +51,16 @@ function insertEmployee(event) {
         $('#title').val('')
         $('#annualSalary').val('')
 
-        totalMonthly+=parseInt(`${employee.annualSalary}`)
-        $('#total').text(totalMonthly);
+        totalMonthly = Number(totalMonthly) + Number(employee.annualSalary)
+        $('#total').text(totalMonthly.toFixed(2));
     }
 }
 
 // function to delete the employees information
 function removeEmployee() {
     $(this).parent().parent().remove();
+    totalMonthly=totalMonthly-employeeGlobal[employeeGlobal.length-1]
+    employeeGlobal.pop()
+    $('#total').html(totalMonthly);
+    return totalMonthly
 }

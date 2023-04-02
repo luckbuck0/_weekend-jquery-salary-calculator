@@ -37,3 +37,7 @@ background-color: rgb(200, 188, 188);
 .hi{
     border: 33px solid black;
 }
+
+#tbody{
+   text-align:center ;
+}

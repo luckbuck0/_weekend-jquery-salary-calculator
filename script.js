@@ -18,7 +18,6 @@ function onReady() {
 
 }
 
-
 // function to insert employee information to the tbody section
 function insertEmployee(event) {
     // A event preventions that stops form from performing its default function
@@ -53,6 +52,10 @@ function insertEmployee(event) {
 
         totalMonthly = Number(totalMonthly) + Number(employee.annualSalary)
         $('#total').text(totalMonthly.toFixed(2));
+
+        if(totalMonthly>20000){
+            $('#total').css("background-color","red")
+        }
     }
 }
 
@@ -62,5 +65,9 @@ function removeEmployee() {
     totalMonthly=totalMonthly-employeeGlobal[employeeGlobal.length-1]
     employeeGlobal.pop()
     $('#total').html(totalMonthly);
+    if(totalMonthly<20000){
+        $('#total').css("background-color","transparent")
+    }
     return totalMonthly
+    
 }

@@ -6,7 +6,7 @@ $(document).ready(onReady);
 
 //global variable used to calculate total monthly salary
 let totalMonthly = ''
-let employeeGlobal=[]
+let employeeGlobal = []
 
 // function that will serve as a staging area for events
 function onReady() {
@@ -24,6 +24,8 @@ function insertEmployee(event) {
     event.preventDefault();
     // A if statement to make sure the employee inputs the required functions
     if ($('#firstName').val() != '' && $('#id').val() != '') {
+        // a object called employee that holds all the information collected in the inputs
+        // and stores them in the employee object
         let employee = {
             firstName: $('#firstName').val(),
             lastName: $('#lastName').val(),
@@ -31,7 +33,7 @@ function insertEmployee(event) {
             Title: $('#title').val(),
             annualSalary: $('#annualSalary').val()
         }
-        // Used to add the values in the paremeters above to the tbody section
+        // Used to add the values in the object above to the tbody section
         $('#tbody').append(`<tr>
         <td>${employee.firstName}</td>
         <td>${employee.lastName}</td>
@@ -42,32 +44,46 @@ function insertEmployee(event) {
           <button class="deleteButton">Delete</button>
         </td>
     </tr>`)
-    employeeGlobal.push(employee.annualSalary)
+        // taking the employee annual salary array and pushing it into a global array to be used to
+        //      subtract from the total monthly
+        employeeGlobal.push(employee.annualSalary)
         // Made to set the values back to empty after submitted 
         $('#firstName').val('')
         $('#lastName').val('')
         $('#id').val('')
         $('#title').val('')
         $('#annualSalary').val('')
-
+        // the total monthly variable which is set to 0 plus the number value of employee annual salary
+        // which is taken from the input value of annual salary input everytime it is entered 
         totalMonthly = Number(totalMonthly) + Number(employee.annualSalary)
         $('#total').text(totalMonthly.toFixed(2));
-
-        if(totalMonthly>20000){
-            $('#total').css("background-color","red")
+        // a if statement that says if the total monthly exceeds 20000 to turn the css red
+        if (totalMonthly > 20000) {
+            $('#total').css("background-color", "red")
         }
     }
 }
 
 // function to delete the employees information
 function removeEmployee() {
+    // this is identifying the delete button and then to remove the entirety of the
+    // employees the parent function is being used to go back 2 parents and then delete
     $(this).parent().parent().remove();
-    totalMonthly=totalMonthly-employeeGlobal[employeeGlobal.length-1]
+    // total monthly is being subtracted from the last array that was pushed up to
+    // employee global which should be the last input from the annual salary
+    totalMonthly = totalMonthly - employeeGlobal[employeeGlobal.length - 1]
+    // the pop command is removing the last item in the employeeglobal var since it 
+    // is no longer needed
     employeeGlobal.pop()
+    // this is identifying the #total which is a area located in the html and displaying the
+    // value of the total monthly
     $('#total').html(totalMonthly);
-    if(totalMonthly<20000){
-        $('#total').css("background-color","transparent")
+    // a if statement that checks if the total monthly is back down below 20000 after the employee has been deleted
+    // if that is the case the statements makes the background color transparent changing it from red
+    if (totalMonthly < 20000) {
+        $('#total').css("background-color", "transparent")
     }
+    // returns the total monthly
     return totalMonthly
-    
+
 }

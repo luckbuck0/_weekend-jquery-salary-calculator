@@ -1,33 +1,42 @@
+/* adds a background image to the body and a linear gradiant then makes it so it does
+not repeat and sets the size */
 body {
     background: no-repeat;
-    background-image: linear-gradient(to bottom, rgba(244, 61, 5, 0.845), rgba(226, 229, 29, 0.53)) ,url(https://image.lexica.art/full_jpg/db21675f-222b-4ac9-9690-930a008a15f0) ;
-    background-size:100% 130%;
+    background-image: linear-gradient(to bottom, rgba(244, 61, 5, 0.845), rgba(226, 229, 29, 0.53)), url(https://image.lexica.art/full_jpg/db21675f-222b-4ac9-9690-930a008a15f0);
+    background-size: 100% 130%;
 }
 
+/* creates a section below all the financial information that puts the companies logo
+in the middle */
 .me {
+    background: no-repeat;
+    margin-left: 37%;
     height: 300px;
     background-image: url(/imgs/My\ project.png);
     background-size: contain;
     text-align: center;
     padding-top: -5px;
-    color:rgb(236, 214, 17);
+    color: rgb(236, 214, 17);
 }
 
+/* sets the headers text font size and family and then makes sure 
+all the items are properly centered and their are no gaps between top and sides */
 header {
-font-size: 30px;
-font-family: serif;
-background: rgb(242, 218, 36,.4);
-color: rgba(236, 232, 17, 0.97);
-margin: -10px;
-padding: 10px;
-padding-bottom: 20px;
-margin-bottom: -25px;
-border-style:inset;
-border-color:rgba(255, 217, 0, 0.43);
-text-align: center;
+    font-size: 30px;
+    font-family: serif;
+    background: rgb(242, 218, 36, .4);
+    color: rgba(236, 232, 17, 0.97);
+    margin: -10px;
+    padding: 10px;
+    padding-bottom: 20px;
+    margin-bottom: -25px;
+    border-style: inset;
+    border-color: rgba(255, 217, 0, 0.43);
+    text-align: center;
 }
 
-.you{
+/* used for the footer below with the company name */
+.you {
     text-align: center;
     color: rgb(243, 217, 48);
     background-image: linear-gradient(45deg, #ca211858, #5509fa55);
@@ -35,38 +44,44 @@ text-align: center;
     padding-bottom: 10px;
 }
 
-.addEmployee{
+/* creates a gradient for the add employee section and sets the
+size and margins for the length of the gradiant */
+.addEmployee {
     padding-bottom: 10px;
     background-image: linear-gradient(45deg, #ca2118, #5609fa);
     background-size: 100%;
     background-clip: unset;
     margin-top: 25px;
-    margin-left:-10px;
+    margin-left: -10px;
     margin-right: -30px;
     color: rgb(243, 217, 48);
-    padding-left: 10px;padding-top: 5px;
-    
+    padding-left: 10px;
+    padding-top: 5px;
+
 }
 
-
-form{
+/* creates the gradiant for the form section  */
+form {
     padding-bottom: 10px;
     background-image: linear-gradient(45deg, #ca2118, #5609fa);
     background-size: 100%;
     background-clip: unset;
     margin-top: -20px;
-    margin-left:-5px;
+    margin-left: -5px;
     margin-right: -10px;
     color: rgb(243, 217, 48);
     padding-left: 10px;
+    text-align: center;
 }
 
+/* creates borders and defines a width for the input */
 input {
-width: 150px;
-border: 1px solid;
+    width: 150px;
+    border: 1px solid;
 }
 
-h3{
+/* creates a gradiant for the form sections to make it look nice */
+h3 {
     background-image: linear-gradient(45deg, #ca2118, #540af3);
     background-size: 100%;
     background-clip: unset;
@@ -76,16 +91,22 @@ h3{
     padding-right: 10px;
     color: rgb(243, 217, 48);
 }
-.submit-button{
+
+/* css for the submit button */
+.submit-button {
     padding-right: 20px;
     text-align: end;
 }
 
-table{
-    width:100%;
+table {
+    width: 100%;
 }
 
-table, th, td {
+/* css to stylize the grid where the employee info 
+will show up */
+table,
+th,
+td {
     padding-top: 20px;
     margin-left: 5px;
     margin-right: 50px;
@@ -95,14 +116,7 @@ table, th, td {
     background-color: rgb(255, 5, 5);
 }
 
-.totalMonthly{
+/* used for the total montly html to align it to the end */
+.totalMonthly {
     text-align: end;
-}
-
-.hi{
-    border: 33px solid rgb(241, 238, 238);
-}
-
-#tbody{
-   text-align:center ;
 }

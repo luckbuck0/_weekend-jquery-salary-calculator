@@ -33,13 +33,14 @@ function insertEmployee(event) {
             Title: $('#title').val(),
             annualSalary: $('#annualSalary').val()
         }
+        let employeeannual= Number(employee.annualSalary)
         // Used to add the values in the object above to the tbody section
         $('#tbody').append(`<tr>
         <td>${employee.firstName}</td>
         <td>${employee.lastName}</td>
         <td>${employee.id}</td>
         <td>${employee.Title}</td>
-        <td>${employee.annualSalary}</td>
+        <td>${convertToCurrency(employeeannual)}</td>
         <td>
           <button class="deleteButton">Delete</button>
         </td>
@@ -53,10 +54,11 @@ function insertEmployee(event) {
         $('#id').val('')
         $('#title').val('')
         $('#annualSalary').val('')
+
         // the total monthly variable which is set to 0 plus the number value of employee annual salary
-        // which is taken from the input value of annual salary input everytime it is entered 
-        totalMonthly = Number(totalMonthly) + Number(employee.annualSalary)
-        $('#total').text(totalMonthly.toFixed(2));
+        // which is taken from the input value of employeeannual/12 for months in a year input everytime it is entered 
+        totalMonthly = Number(totalMonthly) + employeeannual/12
+        $('#total').text(convertToCurrency(totalMonthly));
         // a if statement that says if the total monthly exceeds 20000 to turn the css red
         if (totalMonthly > 20000) {
             $('#total').css("background-color", "red")
@@ -71,13 +73,13 @@ function removeEmployee() {
     $(this).parent().parent().remove();
     // total monthly is being subtracted from the last array that was pushed up to
     // employee global which should be the last input from the annual salary
-    totalMonthly = totalMonthly - employeeGlobal[employeeGlobal.length - 1]
+    totalMonthly = totalMonthly - (employeeGlobal[employeeGlobal.length - 1]/12)
     // the pop command is removing the last item in the employeeglobal var since it 
     // is no longer needed
     employeeGlobal.pop()
     // this is identifying the #total which is a area located in the html and displaying the
     // value of the total monthly
-    $('#total').html(totalMonthly);
+    $('#total').html(convertToCurrency(totalMonthly));
     // a if statement that checks if the total monthly is back down below 20000 after the employee has been deleted
     // if that is the case the statements makes the background color transparent changing it from red
     if (totalMonthly < 20000) {
@@ -86,4 +88,10 @@ function removeEmployee() {
     // returns the total monthly
     return totalMonthly
 
+}
+
+// function to convert numbers into usd currency
+function convertToCurrency(dollars){
+   let dollarString= new Intl.NumberFormat('us-EN', { style: 'currency', currency: 'USD' }).format(dollars);
+   return dollarString
 }
